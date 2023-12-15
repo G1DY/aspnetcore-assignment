@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,11 +14,10 @@
 
   <ItemGroup>
     <Folder Include="Repository\" />
-    <Folder Include="Services\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\CheckIn\" />
-    <Folder Include="Views\ServicePoint\" />
-    <Folder Include="Views\Waiting\" />
+
+
+
   </ItemGroup>
 
   <ItemGroup>

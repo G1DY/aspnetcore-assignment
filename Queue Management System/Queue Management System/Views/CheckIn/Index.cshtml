@@ -1,6 +1,13 @@
-﻿namespace Queue_Management_System.Views.CheckIn
-{
-    public class Index
-    {
-    }
-}
+﻿<!-- Views/CheckIn/Index.cshtml -->
+@model CheckIn
+
+<h2>Check-In</h2>
+
+<form asp-action="CheckIn" method="post">
+    <div class="form-group">
+        <label asp-for="UserName">User Name:</label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <!-- Add other form fields as needed -->
+    <button type="submit" class="btn btn-primary">Check In</button>
+</form>
