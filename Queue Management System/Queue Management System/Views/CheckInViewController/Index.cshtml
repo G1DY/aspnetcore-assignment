@@ -1,9 +1,9 @@
 ﻿<!-- Views/CheckIn/Index.cshtml -->
-@model CheckIn
+@model Queue_Management_System.Models.CheckInView
 
 <h2>Check-In</h2>
 
-<form asp-action="CheckIn" method="post">
+<form asp-action="CheckInView" method="post">
     <div class="form-group">
         <label asp-for="UserName">User Name:</label>
         <input asp-for="UserName" class="form-control" />

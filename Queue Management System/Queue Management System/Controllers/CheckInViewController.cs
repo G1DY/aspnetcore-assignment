@@ -18,7 +18,7 @@ namespace Queue_Management_System.Controllers
             // Handle the check-in logic (e.g., store the data in the database)
             // and a method like CreateData to handle database operations.
 
-            var dataBaseHelper = new DataBaseHelper("your_connection_string");
+            var dataBaseHelper = new DataBaseHelper("Host=localhost;Port=5432;Database=QueueManagementSystem;Username=postgres;Password=K1pker1ng;");
             dataBaseHelper.CreateData($"User: {model.UserName}, Check-in Time: {DateTime.Now}");
 
             // Redirect to the check-in confirmation page

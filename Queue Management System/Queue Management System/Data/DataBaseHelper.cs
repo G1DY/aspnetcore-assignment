@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Npgsql;
 
 namespace Queue_Management_System.Data
@@ -7,9 +8,9 @@ namespace Queue_Management_System.Data
     {
         private readonly string _connectionString;
 
-        private const string TableName = "QueueManagementSystem";
+        private const string TableName = "CheckIn";
 
-        private const string ColumnName = "column1";
+        private const string ColumnName = "UserName";
 
         public DataBaseHelper(string connectionString) => _connectionString = connectionString;
 
@@ -19,10 +20,30 @@ namespace Queue_Management_System.Data
             {
                 conn.Open();
 
-                using (var cmd = new NpgsqlCommand($"INSERT INTO {TableName} ({ColumnName}) VALUES (@data)", conn))
+                // Split the data string into individual values
+                var values = data.Split(',');
+
+                // Extract the date and time portion
+                var dateTimeString = values[1].Trim();
+
+                // Parse the date and time using the specified format
+                if (DateTime.TryParseExact(dateTimeString, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var checkInTime))
                 {
-                    cmd.Parameters.AddWithValue("data", data);
-                    cmd.ExecuteNonQuery();
+                    // Exclude the auto-incremented Id column from the INSERT INTO statement
+                    using (var cmd = new NpgsqlCommand($"INSERT INTO {TableName} (UserName, CheckInTime, SelectedService) VALUES (@UserName, @CheckInTime, @SelectedService)", conn))
+                    {
+                        // Add parameters with the corresponding values
+                        cmd.Parameters.AddWithValue("UserName", values[0].Trim());
+                        cmd.Parameters.AddWithValue("CheckInTime", checkInTime);
+                        cmd.Parameters.AddWithValue("SelectedService", values[2].Trim());
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    // Handle parsing error
+                    Console.WriteLine("Error parsing date and time");
                 }
             }
         }
@@ -50,7 +71,7 @@ namespace Queue_Management_System.Data
             {
                 conn.Open();
 
-                using (var cmd = new NpgsqlCommand($"UPDATE {TableName} SET {ColumnName} = @newData WHERE id = @id", conn))
+                using (var cmd = new NpgsqlCommand($"UPDATE {TableName} SET {ColumnName} = @newData WHERE Id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("newData", newData);
                     cmd.Parameters.AddWithValue("id", id);
@@ -65,7 +86,7 @@ namespace Queue_Management_System.Data
             {
                 conn.Open();
 
-                using (var cmd = new NpgsqlCommand($"DELETE FROM {TableName} WHERE id = @id", conn))
+                using (var cmd = new NpgsqlCommand($"DELETE FROM {TableName} WHERE Id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("id", id);
                     cmd.ExecuteNonQuery();
