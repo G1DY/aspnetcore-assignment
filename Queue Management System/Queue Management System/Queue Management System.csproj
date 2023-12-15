@@ -16,6 +16,13 @@
     <Folder Include="Repository\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\CheckIn\" />
+    <Folder Include="Views\ServicePoint\" />
+    <Folder Include="Views\Waiting\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="8.0.1" />
   </ItemGroup>
 
 </Project>
