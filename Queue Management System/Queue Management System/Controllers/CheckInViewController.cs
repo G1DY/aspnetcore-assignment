@@ -8,7 +8,9 @@ namespace Queue_Management_System.Controllers
     public class CheckInViewController : Controller
     {
         public IActionResult Index()
-        {
+        { 
+
+            ViewData["Message"] = "Hello, World!";
             return View();
         }
 
