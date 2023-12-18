@@ -1,13 +1,28 @@
 ﻿<!-- Views/CheckIn/Index.cshtml -->
 @model Queue_Management_System.Models.CheckInView
 
-<h2>Check-In</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In Page</title>
+    <style>
+        /* Add your styling here */
+    </style>
+</head>
+<body>
+    <h1>Welcome to Queue Management System</h1>
+    <p>Select your service:</p>
+    <button onclick="printTicket('Service A')">Service A</button>
+    <button onclick="printTicket('Service B')">Service B</button>
+    <button onclick="printTicket('Service C')">Service C</button>
 
-<form asp-action="CheckInView" method="post">
-    <div class="form-group">
-        <label asp-for="UserName">User Name:</label>
-        <input asp-for="UserName" class="form-control" />
-    </div>
-    <!-- Add other form fields as needed -->
-    <button type="submit" class="btn btn-primary">Check In</button>
-</form>
+    <script>
+        function printTicket(service) {
+            // Implement printing logic or send a request to the server to generate a ticket.
+            alert('Ticket printed for ' + service);
+        }
+    </script>
+</body>
+</html>
