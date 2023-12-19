@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Queue_Management_System.Data;
 using Queue_Management_System.Models;
-using System;
 
 namespace Queue_Management_System.Controllers
 {
     public class CheckInViewController : Controller
     {
-        private ServiceModel serviceModel;
+        private ServicesModel serviceModel;
 
-        public CheckInController(ServiceModel serviceModel)
+        public CheckInViewController(ServicesModel serviceModel)
         {
             this.serviceModel = serviceModel;
         }
 
-        public TicketModel CheckIn(string serviceName)
+        public TicketsModel CheckIn(string serviceName)
         {
             var ticketNumber = GenerateTicketNumber();
-            var ticket = new TicketModel { Service = serviceName, Number = ticketNumber };
+            var ticket = new TicketsModel { ServiceName = serviceName, TicketNumber = ticketNumber };
             serviceModel.Enqueue(ticket);
             return ticket;
         }
@@ -28,9 +26,9 @@ namespace Queue_Management_System.Controllers
             // For simplicity, using a static counter here
             return "A" + (serviceModel.GetQueueLength() + 1);
         }
-        public IActionResult Index()
-        { 
 
+        public IActionResult Index()
+        {
             ViewData["Message"] = "Hello, World!";
             return View();
         }
@@ -39,10 +37,9 @@ namespace Queue_Management_System.Controllers
         public IActionResult CheckInView(CheckInView model)
         {
             // Handle the check-in logic (e.g., store the data in the database)
-            // and a method like CreateData to handle database operations.
-
-            var dataBaseHelper = new DataBaseHelper("Host=localhost;Port=5432;Database=QueueManagementSystem;Username=postgres;Password=K1pker1ng;");
-            dataBaseHelper.CreateData($"User: {model.UserName}, Check-in Time: {DateTime.Now}");
+            // You might want to use a service or repository for database operations.
+            // Example using a service method named CreateData
+            // var result = dataBaseHelper.CreateData($"User: {model.UserName}, Check-in Time: {DateTime.Now}");
 
             // Redirect to the check-in confirmation page
             return RedirectToAction("CheckInConfirmation");

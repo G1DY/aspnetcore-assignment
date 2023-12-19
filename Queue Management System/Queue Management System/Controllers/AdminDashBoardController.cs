@@ -1,31 +1,53 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Queue_Management_System.Models;
 
 namespace Queue_Management_System.Controllers
 {
     [Authorize]
-    public class AdminDashboardController
+    public class AdminDashboardController : Controller
     {
-        private Services services;
+        private readonly ServicesModel _services;
 
-        public AdminDashboardController(Services services)
+        public AdminDashboardController(ServicesModel services)
         {
-            this.services = services;
+            _services = services;
         }
 
-        public void ConfigureService(string serviceName)
+        [HttpGet]
+        public IActionResult Index()
         {
-            //logic to configure a service
+            // Return the main admin dashboard view
+            return View();
         }
 
-        public void ConfigureProvider(string providerName)
+        [HttpPost]
+        public IActionResult ConfigureService(string serviceName)
         {
-            //logic to configure a service provider
+            // Logic to configure a service
+            //object value = _services.ConfigureService(serviceName);
+
+            // Redirect to a different action or return a view
+            return RedirectToAction(nameof(Index));
         }
 
-        public void GenerateReport()
+        [HttpPost]
+        public IActionResult ConfigureProvider(string providerName)
         {
-            //logic to generate an analytical report
+            // Logic to configure a service provider
+            _services.ConfigureProvider(providerName);
+
+            // Redirect to a different action or return a view
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult GenerateReport()
+        {
+            // Logic to generate an analytical report
+
+            // Return a view or some result
+            return View();
         }
     }
 }

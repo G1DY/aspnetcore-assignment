@@ -1,8 +1,18 @@
 ﻿namespace Queue_Management_System.Models
 {
-    public class Tickets
+    public class TicketsModel
     {
-        public string Service { get; set; }
-        public string Number { get; set; }
+        public int TicketId { get; set; }
+        public string? TicketNumber { get; set; }
+
+        private string _status = "waiting";
+        public string Status 
+        { 
+            get { return _status; }
+
+            set { _status = value; }
+        }
+
+        public string ServiceName { get; internal set; }
     }
 }

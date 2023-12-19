@@ -1,0 +1,54 @@
+﻿/* Reset some default styles for consistency across browsers */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a global font family and size */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+/* Define a container to center content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Apply some basic styling to buttons */
+button, input[type="button"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+    button:hover, input[type="button"]:hover {
+        background-color: #45a049;
+    }
+
+/* Style links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Responsive layout adjustments */
+@media screen and (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    /* Example: Mobile-friendly navigation styles */
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .navbar a {
+            margin-bottom: 10px;
+        }
+}

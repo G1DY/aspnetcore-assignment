@@ -1,0 +1,28 @@
+﻿.ticket {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+    .ticket h3 {
+        color: #333;
+    }
+
+    .ticket p {
+        color: #666;
+    }
+
+    /* Styling for different ticket statuses */
+    .ticket.waiting {
+        background-color: #ffc107; /* Yellow */
+    }
+
+    .ticket.in-process {
+        background-color: #28a745; /* Green */
+    }
+
+    .ticket.completed {
+        background-color: #007bff; /* Blue */
+        color: #fff;
+    }

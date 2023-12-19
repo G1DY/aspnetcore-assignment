@@ -1,26 +1,33 @@
 ﻿using Queue_Management_System.Models;
 using System;
+using System.Collections.Generic;
+
 namespace Queue_Management_System.Controllers
 {
+    public interface IServicesModel
+    {
+        TicketsModel Dequeue();
+        IEnumerable<TicketsModel> GetQueue();
+    }
+
     public class ServicePointController
     {
-        private ServicesModel ServiceModel;
+        private readonly IServicesModel serviceModel;
 
-        public ServicePointController(ServicesModel ServiceModel)
+        public ServicePointController(IServicesModel serviceModel)
         {
-            this.ServiceModel = ServiceModel;
+            this.serviceModel = serviceModel ?? throw new ArgumentNullException(nameof(serviceModel));
         }
 
         public TicketsModel ProcessNextTicket()
         {
-            var nextTicket = ServiceModel.Dequeue();
+            var nextTicket = serviceModel.Dequeue();
 
             // Logic to handle the next ticket
             if (nextTicket != null)
             {
-                Console.WriteLine($"Processing ticket {nextTicket.Number} for service {nextTicket.Service}");
+                Console.WriteLine($"Processing ticket {nextTicket.TicketNumber} for service {nextTicket.ServiceName}");
             }
-            // To include more logic
             else
             {
                 Console.WriteLine("No tickets available for processing");
@@ -29,36 +36,36 @@ namespace Queue_Management_System.Controllers
             return nextTicket;
         }
 
-        public void MarkAsNoShow(TicketsModel ticket)
+        public void MarkTicketAsNoShow(TicketsModel ticket)
         {
             // Logic to mark a ticket as a no-show
-            Console.WriteLine($"Marking ticket {ticket.Number} as a no-show");
-            // To include more Logic
+            Console.WriteLine($"Marking ticket {ticket.TicketNumber} as a no-show");
+            // To include more logic
         }
 
-        public void MarkAsFinished(TicketsModel ticket)
+        public void MarkTicketAsFinished(TicketsModel ticket)
         {
             // Logic to mark a ticket as finished
-            Console.WriteLine($"Marking ticket {ticket.Number} as finished");
-            // To include more Logic
+            Console.WriteLine($"Marking ticket {ticket.TicketNumber} as finished");
+            // To include more logic
         }
 
         public void TransferTicket(TicketsModel ticket, ServicePointController targetServicePoint)
         {
             // Logic to transfer a ticket to another service point
-            Console.WriteLine($"Transferring ticket {ticket.Number} to {targetServicePoint}");
+            Console.WriteLine($"Transferring ticket {ticket.TicketNumber} to {targetServicePoint}");
             targetServicePoint.ProcessNextTicket();
-            // To include more Logic
+            // To include more logic
         }
 
         public void ViewQueue()
         {
             // Logic to view the current queue
-            var queue = ServiceModel.GetQueue();
+            var queue = serviceModel.GetQueue();
             Console.WriteLine("Current Queue:");
             foreach (var queuedTicket in queue)
             {
-                Console.WriteLine(value: $"Ticket {queuedTicket.Number} - Service {queuedTicket.Service}");
+                Console.WriteLine($"Ticket {queuedTicket.TicketId} - Service {queuedTicket.ServiceName}");
             }
         }
     }
