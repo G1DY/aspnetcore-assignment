@@ -19,8 +19,7 @@ namespace Queue_Management_System.Controllers
             if (nextTicket != null)
             {
                 Console.WriteLine($"Processing ticket {nextTicket.Number} for service {nextTicket.Service}");
-                // Additional processing logic can go here
-            }
+                // To include more logic
             else
             {
                 Console.WriteLine("No tickets available for processing");
