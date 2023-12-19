@@ -19,7 +19,8 @@ namespace Queue_Management_System.Controllers
             if (nextTicket != null)
             {
                 Console.WriteLine($"Processing ticket {nextTicket.Number} for service {nextTicket.Service}");
-                // To include more logic
+            }
+            // To include more logic
             else
             {
                 Console.WriteLine("No tickets available for processing");
@@ -53,7 +54,7 @@ namespace Queue_Management_System.Controllers
         public void ViewQueue()
         {
             // Logic to view the current queue
-            var queue = servicesModel.EnQueue();
+            var queue = servicesModel.GetQueue();
             Console.WriteLine("Current Queue:");
             foreach (var queuedTicket in queue)
             {
