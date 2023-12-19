@@ -7,6 +7,27 @@ namespace Queue_Management_System.Controllers
 {
     public class CheckInViewController : Controller
     {
+        private ServiceModel serviceModel;
+
+        public CheckInController(ServiceModel serviceModel)
+        {
+            this.serviceModel = serviceModel;
+        }
+
+        public TicketModel CheckIn(string serviceName)
+        {
+            var ticketNumber = GenerateTicketNumber();
+            var ticket = new TicketModel { Service = serviceName, Number = ticketNumber };
+            serviceModel.Enqueue(ticket);
+            return ticket;
+        }
+
+        private string GenerateTicketNumber()
+        {
+            // Implement logic to generate a unique ticket number
+            // For simplicity, using a static counter here
+            return "A" + (serviceModel.GetQueueLength() + 1);
+        }
         public IActionResult Index()
         { 
 
