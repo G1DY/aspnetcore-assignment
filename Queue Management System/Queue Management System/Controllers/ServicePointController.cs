@@ -4,16 +4,16 @@ namespace Queue_Management_System.Controllers
 {
     public class ServicePointController
     {
-        private ServicesModel servicesModel;
+        private ServicesModel ServiceModel;
 
-        public ServicePointController(ServicesModel servicesModel)
+        public ServicePointController(ServicesModel ServiceModel)
         {
-            this.servicesModel = servicesModel;
+            this.ServiceModel = ServiceModel;
         }
 
         public TicketsModel ProcessNextTicket()
         {
-            var nextTicket = servicesModel.Dequeue();
+            var nextTicket = ServiceModel.Dequeue();
 
             // Logic to handle the next ticket
             if (nextTicket != null)
@@ -54,7 +54,7 @@ namespace Queue_Management_System.Controllers
         public void ViewQueue()
         {
             // Logic to view the current queue
-            var queue = servicesModel.GetQueue();
+            var queue = ServiceModel.GetQueue();
             Console.WriteLine("Current Queue:");
             foreach (var queuedTicket in queue)
             {
