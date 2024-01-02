@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In System</title>
+</head>
+<body>
+    <h1>Check-In for Services A, B, and C</h1>
+
+    <form id="checkInForm">
+        <label for="service">Select Service:</label>
+        <select id="service" required>
+            <option value="A">Service A</option>
+            <option value="B">Service B</option>
+            <option value="C">Service C</option>
+        </select>
+
+        <br>
+
+        <label for="preferredDateTime">Preferred Date and Time:</label>
+        <input type="datetime-local" id="preferredDateTime" required>
+
+        <br>
+
+        <button type="button" onclick="submitCheckIn()">Check-In</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function submitCheckIn() {
+            const service = document.getElementById("service").value;
+            const preferredDateTime = document.getElementById("preferredDateTime").value;
+
+            fetch('http://localhost:7113//checkin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    selectedService: service,
+                    preferredDateTime: preferredDateTime,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the ticket information
+                    document.getElementById("result").innerHTML = `
+                            <p>Ticket Number: ${data.TicketNumber}</p>
+                            <p>Selected Service: ${data.SelectedService}</p>
+                            <p>Preferred Date and Time: ${data.PreferredDateTime}</p>
+                        `;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById("result").innerHTML = '<p>Error during check-in</p>';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,8 +1,16 @@
-﻿namespace Queue_Management_System.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Queue_Management_System.Models
 {
     public class ServicePoints
     {
-        public int ServicePointID { get; set; }
-        public string ServicePointName { get; set; }
+        [Key]
+        public int ServicePointId { get; set; }
+        public string? ServiceName { get; set; }
+
+        // relationship
+        public List<CheckInModel> CheckIns { get; set; }
     }
 }

@@ -6,8 +6,8 @@ namespace Queue_Management_System.Controllers
 {
     public interface IServicesModel
     {
-        TicketsModel Dequeue();
-        IEnumerable<TicketsModel> GetQueue();
+        CheckInModel Dequeue();
+        IEnumerable<CheckInModel> GetQueue();
     }
 
     public class ServicePointController
@@ -19,14 +19,14 @@ namespace Queue_Management_System.Controllers
             this.serviceModel = serviceModel ?? throw new ArgumentNullException(nameof(serviceModel));
         }
 
-        public TicketsModel ProcessNextTicket()
+        public CheckInModel ProcessNextTicket()
         {
             var nextTicket = serviceModel.Dequeue();
 
             // Logic to handle the next ticket
             if (nextTicket != null)
             {
-                Console.WriteLine($"Processing ticket {nextTicket.TicketNumber} for service {nextTicket.ServiceName}");
+                Console.WriteLine($"Processing ticket {nextTicket.TicketNumber} for service {nextTicket.TicketNumber}");
             }
             else
             {
@@ -36,21 +36,21 @@ namespace Queue_Management_System.Controllers
             return nextTicket;
         }
 
-        public void MarkTicketAsNoShow(TicketsModel ticket)
+        public void MarkTicketAsNoShow(CheckInModel ticket)
         {
             // Logic to mark a ticket as a no-show
             Console.WriteLine($"Marking ticket {ticket.TicketNumber} as a no-show");
             // To include more logic
         }
 
-        public void MarkTicketAsFinished(TicketsModel ticket)
+        public void MarkTicketAsFinished(CheckInModel ticket)
         {
             // Logic to mark a ticket as finished
             Console.WriteLine($"Marking ticket {ticket.TicketNumber} as finished");
             // To include more logic
         }
 
-        public void TransferTicket(TicketsModel ticket, ServicePointController targetServicePoint)
+        public void TransferTicket(CheckInModel ticket, ServicePointController targetServicePoint)
         {
             // Logic to transfer a ticket to another service point
             Console.WriteLine($"Transferring ticket {ticket.TicketNumber} to {targetServicePoint}");
@@ -65,7 +65,7 @@ namespace Queue_Management_System.Controllers
             Console.WriteLine("Current Queue:");
             foreach (var queuedTicket in queue)
             {
-                Console.WriteLine($"Ticket {queuedTicket.TicketId} - Service {queuedTicket.ServiceName}");
+                Console.WriteLine($"Ticket {queuedTicket.TicketNumber} - Service {queuedTicket.TicketNumber}");
             }
         }
     }
